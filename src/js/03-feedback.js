@@ -4,6 +4,8 @@ const KEY_FOR_STORE = 'feedback-form-state';
 
 const form = document.querySelector('.feedback-form');
 
+const { email, message } = form.elements
+
 
 const data = {};
 
@@ -22,8 +24,8 @@ function onInputForm(event) {
 function onSubmitForm(event) {
   event.preventDefault();
 
-  const myInputElement = document.getElementsByName('email')[0].value;
-  const myMessageElement = document.getElementsByName('message')[0].value;
+  const myInputElement = email.value;
+  const myMessageElement = message.value;
   if (!myInputElement || !myMessageElement) {
     alert('Please enter your email address and message !');
     return false;
@@ -48,11 +50,9 @@ function readDataFromLocalStorage() {
       console.error('Set state error: ', error.message);
       return;
     }
-
-    for (let el in playerSettings) {
-      const myInputElement = document.getElementsByName(el)[0];
-      myInputElement.value = playerSettings[el];
-      data[el] = playerSettings[el];
-    }
+     email.value = playerSettings.email;
+     message.value = playerSettings.message;
   }
 }
+
+
